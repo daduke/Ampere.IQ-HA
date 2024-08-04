@@ -1,0 +1,73 @@
+rest:
+  - resource: "http://IP_ADDRESS/rest/items/"
+    scan_interval: 15
+    sensor:
+      - name: "Battery temperature"
+        value_template: "{{ (value_json | selectattr('name','contains','battery_temperature') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "°C"
+        unique_id: ampere_battery_temperature
+        device_class: battery
+        state_class: measurement
+      - name: "Battery level"
+        value_template: "{{ (value_json | selectattr('name','contains','battery_stateOfCharge') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "%"
+        unique_id: ampere_battery_stateOfCharge
+        device_class: battery
+        state_class: measurement
+      - name: "Battery power"
+        value_template: "{{ (value_json | selectattr('name','contains','battery_power') | list | first).state.split(' ')[0] | float | multiply(-1) | round(2) }}"
+        unit_of_measurement: "W"
+        unique_id: ampere_battery_power
+        device_class: power
+        state_class: measurement
+      - name: "Battery charge energy"
+        value_template: "{{ (value_json | selectattr('name','contains','battery_totalChargeEnergy') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "kWh"
+        unique_id: ampere_battery_totalChargeEnergy
+        device_class: energy
+        state_class: total_increasing
+      - name: "Battery discharge energy"
+        value_template: "{{ (value_json | selectattr('name','contains','battery_totalDischargeEnergy') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "kWh"
+        unique_id: ampere_battery_totalDischargeEnergy
+        device_class: energy
+        state_class: total_increasing
+
+      - name: "Solar power"
+        value_template: "{{ (value_json | selectattr('name','contains','inverter_pvPower') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "W"
+        unique_id: ampere_inverter_pvPower
+        device_class: power
+        state_class: measurement
+      - name: "Solar energy"
+        value_template: "{{ (value_json | selectattr('name','contains','inverter_pvEnergy') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "kWh"
+        unique_id: ampere_inverter_pvEnergy
+        device_class: energy
+        state_class: total_increasing
+
+      - name: "Grid power"
+        value_template: "{{ (value_json | selectattr('name','contains','powermeter_realPower') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "W"
+        unique_id: ampere_powermeter_realPower
+        device_class: power
+        state_class: measurement        
+      - name: "Grid export total"
+        value_template: "{{ (value_json | selectattr('name','contains','powermeter_totalExport') | list | first).state.split(' ')[0] | float | multiply(0.00000027777) | round(2) }}"
+        unit_of_measurement: "kWh"
+        unique_id: ampere_powermeter_totalExport
+        device_class: energy
+        state_class: total_increasing
+      - name: "Grid import total"
+        value_template: "{{ (value_json | selectattr('name','contains','powermeter_totalImport') | list | first).state.split(' ')[0] | float | multiply(0.00000027777) | round(2) }}"
+        unit_of_measurement: "kWh"
+        unique_id: ampere_powermeter_totalImport
+        device_class: energy
+        state_class: total_increasing
+
+      - name: "Home power"
+        value_template: "{{ (value_json | selectattr('name','contains','inverter_selfConsumptionPower') | list | first).state.split(' ')[0] | float | round(2) }}"
+        unit_of_measurement: "W"
+        unique_id: ampere_inverter_selfConsumptionPower
+        device_class: power
+        state_class: measurement        
