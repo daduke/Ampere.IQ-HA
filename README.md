@@ -19,3 +19,5 @@ Since I've only started with Home Assistant 4 days ago, there might be a better/
 homeassistant:
   packages: !include_dir_named integrations
 ```
+
+The values are the same as in the Android app, so I seem to have identified the correct probes 🙂
