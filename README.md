@@ -1,6 +1,8 @@
 # Ampere.IQ-HA
 Home Assistant sensor for Ampere Pro PV
 
+*Update*: EKD seems to have updated the firmware and removed/changed the http API. I have switched to the [SAJ H2 Inverter Modbus](https://github.com/stanus74/home-assistant-saj-h2-modbus/) plugin.
+
 Inspired by [some](https://community.home-assistant.io/t/energy-concepts-germany-solar-storage-ampere-storage-pro/693609) [existing](https://community.home-assistant.io/t/integration-of-ampere-iq-inverter-battery-and-kiwigrid-energy-manager/684978/8) attempts of getting EKD Ampere Pro PV values into Home Assistant, I created a sensor YAML that provides all relevant measurement values (power, energy, temp, charge..) via the Ampere.IQ Smartbox. The sensor integrates neatly into the energy dashboard and [Power Flow Card Plus](https://community.home-assistant.io/t/power-flow-card-plus/552326)
 
 [<img src="energy_th.png">](energy.png) &nbsp; &nbsp;
